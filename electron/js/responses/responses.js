@@ -1,3 +1,6 @@
+
+const event = require('../../js/events/events')
+
 module.exports = {
 
 	confused: {

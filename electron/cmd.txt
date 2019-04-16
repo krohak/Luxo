@@ -1,0 +1,1 @@
+./node_modules/.bin/electron-rebuild --pre-gyp-fix -v 4.1.4

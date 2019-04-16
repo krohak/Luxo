@@ -1,6 +1,6 @@
 'use strict'
 
-require('app-module-path').addPath(__dirname)
+// require('app-module-path').addPath(__dirname)
 
 const event = require('js/events/events')
 const mic = require('js/senses/mic')

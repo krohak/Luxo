@@ -3,12 +3,12 @@
 const record = require('node-record-lpcm16')
 const path = require('path')
 const os = require('os')
-const config = require('config/config')
+const config = require('../../config/config')
 
 const {Detector, Models} = require('snowboy')
 
-const event = require('js/events/events')
-const mic = require('js/senses/mic')
+const event = require('../../js/events/events')
+const mic = require('../../js/senses/mic')
 
 // const dialogflow = require('js/intent-engines/dialogflow')
 
@@ -18,16 +18,20 @@ function setupSnowboy(){
 	const models = new Models()
 
 	models.add({
-		file: path.join(process.cwd(),'app','config',config.speech.model),
+		file: path.join(process.cwd(),'app','../config', config.speech.model),
 		sensitivity: config.speech.sensitivity,
 		hotwords: config.speech.wakeword
 	})
 
+	console.log("Added config speech model")
+
 	const wakewordDetector = new Detector({
-		resource: path.join(process.cwd(), 'app', 'config', 'common.res'),
+		resource: path.join(process.cwd(), 'app', '../config', 'common.res'),
 		models: models,
 		audioGain: 2.0
 	})
+
+	console.log("wakeword")
 
 	return wakewordDetector
 }
@@ -52,6 +56,7 @@ function startListening(){
 	
 	const wakewordDetector = setupSnowboy()
 
+	console.log("here")
 	const {recorder, recorderOpts} = setupRecorder()
 
 	// const {sessionClient, dialogflowRequest} = dialogflow.setup()

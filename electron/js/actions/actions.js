@@ -1,8 +1,8 @@
-const event = require('js/events/events')
-const responses = require('js/responses/responses')
-const common = require('js/helpers/common')
-const gif = require('js/helpers/gifs')
-const video = require('js/helpers/videos')
+const event = require('../../js/events/events')
+const responses = require('../../js/responses/responses')
+const common = require('../../js/helpers/common')
+// const gif = require('../../js/helpers/gifs')
+// const video = require('../../js/helpers/videos')
 
 async function setAnswer(ans=null, overrides={}){
 
@@ -16,13 +16,13 @@ async function setAnswer(ans=null, overrides={}){
 	let q = await common.setQuery(ans)
 	console.log(`BACK IN FUNCTION ${q}`)
 
-	let r = await gif.findOnline(q)
-	console.log(`Returned video: ${r}`)
+	// let r = await gif.findOnline(q)
+	// console.log(`Returned video: ${r}`)
 
-	let d = await video.findDuration(r)
-	console.log(`Duration: ${d}`)
+	// let d = await video.findDuration(r)
+	// console.log(`Duration: ${d}`)
 
-	let o = await common.setTimer(d)
+	// let o = await common.setTimer(d)
 	console.log(`Done in answer`)
 
 	if(ans.type == 'remote'){

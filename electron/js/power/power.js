@@ -1,4 +1,4 @@
-const event = require('js/events/events')
+const event = require('../../js/events/events')
 const execSync = require('child_process').execSync
 
 function shutdown() {

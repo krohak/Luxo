@@ -1,10 +1,10 @@
-const event = require('js/events/events')
-const action = require('js/actions/actions')
-const common = require('js/helpers/common')
-const power = require('js/power/power')
-const speak = require('js/senses/speak')
-const dialogflow = require('js/intent-engines/dialogflow')
-const mic = require('js/senses/mic')
+const event = require('../../js/events/events')
+const action = require('../../js/actions/actions')
+const common = require('../../js/helpers/common')
+const power = require('../../js/power/power')
+// const speak = require('../../js/senses/speak')
+const dialogflow = require('../../js/intent-engines/dialogflow')
+const mic = require('../../js/senses/mic')
 
 module.exports = () => {
 
@@ -21,12 +21,12 @@ module.exports = () => {
 
 	event.on('end-speech-to-text', () =>{
 		
-		if(process.env.OS == "unsupported"){
-			document.getElementById("wakeword").style.backgroundColor = ""
-			mic.startMic()
-		} else {
+		// if(process.env.OS == "unsupported"){
+		// 	document.getElementById("wakeword").style.backgroundColor = ""
+		// 	mic.startMic()
+		// } else {
 			event.emit('pipe-to-wakeword')
-		}
+		// }
 		
 	})
 
@@ -41,9 +41,9 @@ module.exports = () => {
 
 
 	// AUDIO PLAYBACK
-	event.on('play-sound', speak.playSound)
+	// event.on('play-sound', speak.playSound)
 
-	event.on('set-volume', speak.setVolume)
+	// event.on('set-volume', speak.setVolume)
 
 	// BUTTON PRESSES
 	event.on('btn-4-short-press',()=>{})

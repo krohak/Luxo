@@ -4,6 +4,7 @@ package-lock.json
 .env
 npm-debug.log
 build
-app/config/config.js
-app/config/dialogflow.json
-app/config/Peeqo.pmdl
+config/config.js
+config/dialogflow.json
+config/Peeqo.pmdl
+config/peeqo-79a12-d24ea8c54a6e.json

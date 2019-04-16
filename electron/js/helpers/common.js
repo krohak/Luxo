@@ -17,17 +17,17 @@ function showDiv(id){
 		return
 	}
 
-	for(var i in majorDivs){
-		if(majorDivs[i] != id){
-			let div = document.getElementById(majorDivs[i])
-			if(div){
-				// only if div is found in DOM
-				div.style.display = "none"
-			}
-		} else {
-			document.getElementById(id).style.display = "block"
-		}
-	}
+	// for(var i in majorDivs){
+	// 	if(majorDivs[i] != id){
+	// 		let div = document.getElementById(majorDivs[i])
+	// 		if(div){
+	// 			// only if div is found in DOM
+	// 			div.style.display = "none"
+	// 		}
+	// 	} else {
+	// 		document.getElementById(id).style.display = "block"
+	// 	}
+	// }
 }
 
 async function setQuery(answer){
@@ -125,13 +125,13 @@ async function setTimer(duration){
 	duration = parseInt(duration)
 	let loop = 1
 
-	let afterTransition = () => {
-		let video = document.getElementById("video")
-		event.emit('show-div','videoWrapper')
-		video.play()
-	}
+	// let afterTransition = () => {
+	// 	let video = document.getElementById("video")
+	// 	event.emit('show-div','videoWrapper')
+	// 	video.play()
+	// }
 
-	event.emit('transition-eyes-away', afterTransition)
+	// event.emit('transition-eyes-away', afterTransition)
 
 	let done = await transitionBack(duration*loop)
 

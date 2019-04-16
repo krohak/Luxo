@@ -2,9 +2,9 @@ const dialogflow = require('dialogflow')
 const through2 = require('through2')
 const path = require('path')
 const uuid = require('uuid')
-const config = require('config/config')
-const event = require('js/events/events')
-const mic = require('js/senses/mic')
+const config = require('../../config/config')
+const event = require('../../js/events/events')
+const mic = require('../../js/senses/mic')
 
 function setup(){
 	// DIALOGFLOW
@@ -15,7 +15,7 @@ function setup(){
 	//create a dialogflow session
 	const sessionClient = new dialogflow.SessionsClient({
 		projectId: config.speech.projectId,
-		keyFilename: path.join(process.cwd(), 'app', 'config', config.speech.dialogflowKey)
+		keyFilename: path.join(process.cwd(), 'app', '../config', config.speech.dialogflowKey)
 	})
 
 	const sessionPath = sessionClient.sessionPath(config.speech.projectId, sessionId)
@@ -96,12 +96,22 @@ class DialogflowSpeech {
 					return
 				}
 
-				self.intentObj.intent = data.queryResult.intent.displayName
-				self.intentObj.params = data.queryResult.parameters.fields
-				self.intentObj.queryText = data.queryResult.queryText
-				self.intentObj.responseText = data.queryResult.fulfillmentText
+				console.log(data.queryResult.queryText)
+				
+				self.intentObj = {}
+				
+				if (data.queryResult != null){
+					if (data.queryResult.intent != null){
+					self.intentObj.intent = data.queryResult.intent.displayName
+					}
+					self.intentObj.params = data.queryResult.parameters.fields
+					self.intentObj.queryText = data.queryResult.queryText
+					self.intentObj.responseText = data.queryResult.fulfillmentText
+	
+					self.result = self.intentObj
+				}
 
-				self.result = self.intentObj
+
 
 				self.sttStream.unpipe(self.stream)
 				mic.getMic().unpipe(self.sttStream)
