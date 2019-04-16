@@ -7,4 +7,5 @@ build
 config/config.js
 config/dialogflow.json
 config/Peeqo.pmdl
+config/Luxo.pmdl
 config/peeqo-79a12-d24ea8c54a6e.json
