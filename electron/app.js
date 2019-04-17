@@ -51,6 +51,7 @@ console.log("hey")
 const event = require('./js/events/events')
 const mic = require('./js/senses/mic')
 
+
 var listen = null
 if(process.env.OS !== 'unsupported'){
   listen = require('./js/senses/listen')
@@ -63,7 +64,13 @@ if(process.env.OS !== 'unsupported'){
 // const remote = require('electron').remote
 // const weather = require('./js/skills/weather')
 
+
+
 const listeners = require('./js/events/listeners')()
+
+//initiate leds
+const leds = require('./js/senses/leds')
+// event.emit('led-on', {anim: 'blink', color: 'aqua'})
 
 // keyboard shortcuts
 // document.addEventListener("keydown", (e)=>{
@@ -77,13 +84,13 @@ const listeners = require('./js/events/listeners')()
 // })
 
 // set audio levels
-event.emit('set-volume',0.4)
+// event.emit('set-volume',0.4)
 
 // initiate eyes
 // const eyes = new Eyes()
 
-event.emit('show-div', 'eyeWrapper')
-event.emit('start-blinking')
+// event.emit('show-div', 'eyeWrapper')
+// event.emit('start-blinking')
 
 setTimeout(()=>{
 	
@@ -92,9 +99,7 @@ setTimeout(()=>{
 // initiate buttons
 // buttons.initializeButtons()
 
-//initiate leds
-// const leds = require('./js/senses/leds')
-// event.emit('led-on', {anim: 'circle', color: 'aqua'})
+
 
 // // initiate camera
 // const camera = require('./js/senses/camera')

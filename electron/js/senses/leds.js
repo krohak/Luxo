@@ -1,18 +1,14 @@
-const dotstar = require('js/lib/dotstar')
+// const dotstar = require('js/lib/dotstar')
 const os = require('os')
-const event = require('js/events/events')
+const event = require('../../js/events/events')
 
-if(os.arch == "arm"){
-	const SPI = require('pi-spi')
-	const spi = SPI.initialize('/dev/spidev0.0')
-}
+var Yeelight = require('node-yeelight');
+
 
 class Leds {
 
 	constructor() {
 
-		this.brightness = 0.5
-		this.length = 12
 		this.colors = {
 			"red":[255,0,0],
 			"green":[0,255,0],
@@ -22,28 +18,51 @@ class Leds {
 			"orange":[239,75,36],
 			"yellow":[255,215,18],
 			"pink":[244,52,239],
-			"black":[0,0,0]
-		}
-		this.currentlyOn = []
-		this.trailLength = 3
-
-		this.strip = null
-
-		if(os.arch == "arm"){
-			// only available on pi
-			this.strip = new dotstar.Dotstar(spi, {
-				length: this.length
-			})
+			"white":[255,255,255]
 		}
 
 		this.playAnimation = this.playAnimation.bind(this)
 		this.off = this.off.bind(this)
+		this.returnDevice = this.returnDevice.bind(this)
+		this.setDevice = this.setDevice.bind(this)
+		this.device = null
 
-		if(this.strip){
-			// only listen for led events on pi
-			event.on('led-on', this.playAnimation)
-			event.on('led-off', this.off)
-		}
+		var y = new Yeelight;
+		
+		y.on('ready', function() {
+			console.log('ready');
+			y.discover();
+		});
+		
+		y.on('deviceadded', function(device) {
+			console.log('device added');
+		
+			y.connect(device);
+		});
+		
+		this.y = y;
+
+		this.returnDevice(this.setDevice)
+
+		// console.log(this.device)
+
+		this.y.listen();
+
+	}
+
+	returnDevice(setDevice){
+
+		this.y.on('deviceconnected', function(device) {
+			console.log('device connected');
+			setDevice(device)
+		})
+	}
+
+	setDevice(device){
+		this.device = device
+		event.on('led-on', this.playAnimation)
+		event.on('led-off', this.off)
+		this.on("white", 50)
 	}
 
 	playAnimation(anim){
@@ -51,7 +70,38 @@ class Leds {
 		this[anim.anim](anim.color)
 	}
 
-	blink(color='red', time=500, count=5, brightness=0.5) {
+	party(color='red', time=400, count=17, brightness=70, colordict=this.colors){
+		let colorCount = 0
+		let numcolors = Object.keys(colordict).length
+
+		function* colorYield (){
+			console.log()
+			let colornames_twice = Object.keys(colordict).concat(Object.keys(colordict))
+
+			for (var key of colornames_twice){
+				console.log(key)
+				yield key;
+			}
+		}
+
+		var colorIterator = colorYield();
+		
+		let blinkInterval = setInterval(() => {
+
+			this.on(colorIterator.next().value, brightness)
+
+			colorCount++
+
+			if(colorCount>count){
+				clearInterval(blinkInterval)
+				blinkInterval = null
+				this.off()
+			}
+		}, time)
+		
+	}
+
+	blink(color='red', time=500, count=5, brightness=50) {
 		let blinkCount = 0
 
 		let blinkInterval = setInterval(() => {
@@ -66,119 +116,49 @@ class Leds {
 			if(blinkCount>count){
 				clearInterval(blinkInterval)
 				blinkInterval = null
+				this.off()
 			}
 		}, time)
 	}
 
-	fade (){
-
-	}
-
-	circle(color="aqua"){
-		this.trail(0,5)
-		this.trail(11,6)
-
-		setTimeout(() => {
-			this.trail(color, 5,0,false)
-			this.trail(color,6,11,false)
-		}, 1000)
-
-		setTimeout(()=>{
-			this.off()
-		}, 2500)
-	}
-
-	circleOut(color="green"){
-		this.trail(color, 0, 5)
-		this.trail(color, 11,6)
-	}
-
-	trail(color, start, finish, overshoot=true, brightness=0.5, time=100, trailLength=3){
-
-		if((start < 0 || finish < 0) || (start > this.length || finish > this.length)){
-			console.error(`Led values are outside permissible range of 0-11`)
-			return
-		}
-
-		let firstLed = start
-		let currentlyOn = []
-
-		let moveInterval = setInterval(() => {
-			currentlyOn.push(firstLed)
-
-			if(currentlyOn.length > trailLength){
-				// remove first led to maintain trail length
-				let removeLed = currentlyOn.shift()
-				this.strip.set(removeLed, ...this.colors["black"],0)
-			}
-
-			for(let i=0;i<currentlyOn.length;i++){
-				this.strip.set(this.currentlyOn[i],...this.colors[color], brightness)
-			}
-
-			this.strip.sync()
-
-			console.log(currentlyOn)
-
-			if(start < finish){
-				// move in clockwise direction
-				firstLed++
-
-				if(firstLed > finish){
-					clearInterval(moveInterval)
-					moveInterval = null
-					if(overshoot){
-						this.clearLedTrail(currentlyOn, time)
-					}
-				}
-			} else if (start > finish){
-				// move in anticlockwise direction
-				firstLed--
-
-				if(firstLed < finish){
-					clearInterval(moveInterval)
-					moveInterval = null
-					if(overshoot){
-						this.clearLedTrail(currentlyOn, time)
-					}
-				}
-			}
-		}, time)
-	}
-
-	clearLedTrail(onLeds, time=100){
-		let removeInterval = setInterval(() => {
-			if(onLeds.length != 0){
-				let offLed = onLeds.shift()
-				this.strip.set(offLed, ...this.colors["black"],0)
-			} else {
-				clearInterval(removeInterval)
-				removeInterval = null
-				this.strip.clear()
-			}
-
-			this.strip.sync()
-		}, time)
-	}
-
-	on(color, brightness=0.5){
+	wakeword(color="white", brightness=100){
 		if(!this.colors.hasOwnProperty(color)){
 			console.error(`Color ${color} has not been set`)
 			return
 		}
 
-		this.strip.all(...colors[color], brightness)
-		this.strip.sync()
+		if(this.device){
+			// console.log(this.device)
+			console.log(`On leds with ${color}`)
+			this.y.setBrightness(this.device, brightness, 300);
+			this.y.setRGB(this.device, this.colors[color], 300)
+		}
+	}
+	
+	on(color, brightness=50){
+		if(!this.colors.hasOwnProperty(color)){
+			console.error(`Color ${color} has not been set`)
+			return
+		}
+
+		if(this.device){
+			// console.log(this.device)
+			console.log(`On leds with ${color}`)
+			this.y.setBrightness(this.device, brightness, 300);
+			this.y.setRGB(this.device, this.colors[color], 300)
+		}
 	}
 
 	off(){
-		this.strip.clear()
-		this.strip.sync()
+		if(this.device){
+			console.log("Off leds")
+			this.y.setPower(this.device, false, 300)
+		}	
 	}
 }
 
 // make singleton
 const leds = new Leds()
-Object.freeze(leds)
+
 
 module.exports = leds

@@ -25,6 +25,17 @@ module.exports = {
 		sound: null
 	},
 
+	expressions: {
+		localFolder: 'greeting',
+		queryTerms: ['hello','hi','howdy','sup','whatsup'],
+		servo: 'look-up-inverted',
+		led: {
+			anim: 'party',
+			color: 'green'
+		},
+		sound: null
+	},
+
 	wakeword: {
 		localFolder: null,
 		queryTerms: null,

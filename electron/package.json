@@ -23,6 +23,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "node-record-lpcm16": "^0.3.1",
+    "node-yeelight": "^1.0.6",
     "pca9685": "^4.0.3",
     "pi-spi": "^1.0.2",
     "rpi-gpio": "^2.1.3",

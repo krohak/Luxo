@@ -13,6 +13,9 @@ async function setAnswer(ans=null, overrides={}){
 	// merge overriden values and new values
 	Object.assign(ans, overrides)
 
+	console.log(`here ${String(ans.led)}`)
+	event.emit('led-on', {anim: ans.led.anim, color: ans.led.color})
+
 	let q = await common.setQuery(ans)
 	console.log(`BACK IN FUNCTION ${q}`)
 
@@ -46,6 +49,7 @@ async function setAnswer(ans=null, overrides={}){
 function hotword(){
 	//setAnswer(responses.wakeword)
 	responses.wakeword.cb()
+	event.emit('led-on', {anim: "wakeword"})
 }
 
 function parseIntent(cmd){

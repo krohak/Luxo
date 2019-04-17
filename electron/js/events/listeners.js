@@ -42,8 +42,11 @@ module.exports = () => {
 
 	// AUDIO PLAYBACK
 	// event.on('play-sound', speak.playSound)
-
 	// event.on('set-volume', speak.setVolume)
+
+	// leds
+	// event.on('led-on', function(){console.log("in les")})
+	
 
 	// BUTTON PRESSES
 	event.on('btn-4-short-press',()=>{})
