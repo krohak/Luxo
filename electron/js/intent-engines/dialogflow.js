@@ -109,12 +109,14 @@ class DialogflowSpeech {
 					self.intentObj.responseText = data.queryResult.fulfillmentText
 	
 					self.result = self.intentObj
+
 				}
 
+				if (self.stream){
+					self.sttStream.unpipe(self.stream)
+					mic.getMic().unpipe(self.sttStream)
+				}
 
-
-				self.sttStream.unpipe(self.stream)
-				mic.getMic().unpipe(self.sttStream)
 			}
 		})
 

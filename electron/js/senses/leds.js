@@ -23,7 +23,7 @@ class Leds {
 
 		this.playAnimation = this.playAnimation.bind(this)
 		this.off = this.off.bind(this)
-		this.returnDevice = this.returnDevice.bind(this)
+		this.handleConnect = this.handleConnect.bind(this)
 		this.setDevice = this.setDevice.bind(this)
 		this.device = null
 
@@ -42,15 +42,13 @@ class Leds {
 		
 		this.y = y;
 
-		this.returnDevice(this.setDevice)
-
-		// console.log(this.device)
+		this.handleConnect(this.setDevice)
 
 		this.y.listen();
 
 	}
 
-	returnDevice(setDevice){
+	handleConnect(setDevice){
 
 		this.y.on('deviceconnected', function(device) {
 			console.log('device connected');
