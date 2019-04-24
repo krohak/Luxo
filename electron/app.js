@@ -70,6 +70,7 @@ const listeners = require('./js/events/listeners')()
 
 //initiate leds
 const leds = require('./js/senses/leds')
+const servo = require('./js/senses/servo')
 // event.emit('led-on', {anim: 'blink', color: 'aqua'})
 
 // keyboard shortcuts

@@ -15,6 +15,7 @@ async function setAnswer(ans=null, overrides={}){
 
 	console.log(`here ${String(ans.led)}`)
 	event.emit('led-on', {anim: ans.led.anim, color: ans.led.color})
+	event.emit('servo-move', {animName: ans.servo})
 
 	let q = await common.setQuery(ans)
 	console.log(`BACK IN FUNCTION ${q}`)
