@@ -39,7 +39,7 @@ function setupSnowboy(){
 function setupRecorder(){
 	// MIC RECORDER
 
-	const recorder = (os.arch()=='arm')?'arecord':'rec' // use arecord on pi, rec on laptop
+	const recorder = 'rec' // use arecord on pi, rec on laptop
 
 	const recorderOpts={
 		verbose: false,
