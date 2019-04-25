@@ -121,13 +121,13 @@ class Leds {
 
 	set(color='red', time=500, count=5, brightness=50){
 		
-		let blinkInterval = setInterval(() => {
+		// let blinkInterval = setInterval(() => {		
 			
-			this.on(color, brightness)
-			
-		}, time)
+		// }, time)
 
-		this.off()
+		this.on(color, brightness)
+		setTimeout(this.off(), 3000);
+		
 	}
 
 	wakeword(color="white", brightness=100){
