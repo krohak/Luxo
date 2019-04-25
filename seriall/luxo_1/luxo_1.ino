@@ -85,14 +85,41 @@ void loop() {
   if (stringComplete) {
     Serial.println(inputString);
 
+
+    // hello
     if (inputString == "a\n"){
       Serial.println("com a");
+        // clear the string:
+        inputString = "";
+        stringComplete = false;
+        
         head_nodding();
         head_nodding();
     }
-    // clear the string:
-    inputString = "";
-    stringComplete = false;
+
+    //dance
+    else if (inputString == "b\n"){
+      Serial.println("com b");
+        // clear the string:
+        inputString = "";
+        stringComplete = false;
+        
+//        body_shake();
+          posture_stand();
+          
+    }
+  
+    //unrecognized
+    else if (inputString == "c\n"){
+      Serial.println("com c");
+        // clear the string:
+        inputString = "";
+        stringComplete = false;
+        
+        head_nodding();
+        head_nodding();
+    }
+
   }
 
 }
@@ -170,11 +197,52 @@ void posture_still(){
 }
 
 void posture_stand(){
-  pwm.setPWM(0, 0, L3);
-  pwm.setPWM(1, 0, L4);
-  pwm.setPWM(2, 0, L5);
-  pwm.setPWM(3, 0, L3);
-  pwm.setPWM(4, 0, L3);
+
+   for (uint16_t pulselen = L2; pulselen < L3; pulselen+=2) {
+    pwm.setPWM(2, 0, pulselen);
+    delay(1);
+  }
+
+  // start from base
+   for (uint16_t pulselen = L1; pulselen < L2; pulselen+=2) {
+    pwm.setPWM(3, 0, pulselen);
+    pwm.setPWM(4, 0, pulselen);
+    delay(1);
+  }
+
+  for (uint16_t pulselen = L2; pulselen < L3; pulselen+=2) {
+    pwm.setPWM(1, 0, pulselen);
+    delay(1);
+  }
+
+  delay(1000);
+
+
+       for (uint16_t pulselen = L2; pulselen < L1; pulselen-=1) {
+    pwm.setPWM(3, 0, pulselen);
+    pwm.setPWM(4, 0, pulselen);
+    delay(1);
+  }
+
+  for (uint16_t pulselen = L3; pulselen > L2; pulselen-=1) {
+    pwm.setPWM(1, 0, pulselen);
+    delay(1);
+  }
+
+
+    for (uint16_t pulselen = L3; pulselen > L2; pulselen-=1) {
+    pwm.setPWM(2, 0, pulselen);
+    delay(1);
+  }
+  
+  
+
+
+
+
+
+ 
+  
 }
 
 void head_nodding(){
@@ -202,19 +270,41 @@ void head_nodding(){
 
 
 void body_shake(){
-  posture_still();
-  for(int i=0; i<4; i++){
-    body_face_right();
-    delay(600);
+
+//  for(int i=0; i<2; i++){
     body_face_left();
-    delay(600);
-  }
+    delay(100);
+    body_face_right();
+    delay(100);
+//  }
 }
 
 void body_face_left(){
-  pwm.setPWM(5, 0, L1);
+
+  // from LMID to L2NHALF
+//  for (uint16_t pulselen = LMID; pulselen > L2NHALF; pulselen-=1) {
+//    pwm.setPWM(5, 0, pulselen);
+//    delay(10);
+//  }
+
+  // from L2NHALF to LMID
+  for (uint16_t pulselen = L1; pulselen < LMID; pulselen+=2) {
+    pwm.setPWM(5, 0, pulselen);
+    delay(10);
+  }
 }
 
 void body_face_right(){
-  pwm.setPWM(5, 0, L4);
+
+    // from LMID to L4NHALF
+  for (uint16_t pulselen = LMID; pulselen < L4NHALF; pulselen+=2) {
+    pwm.setPWM(5, 0, pulselen);
+    delay(10);
+  }
+
+  // from L4NHALF to LMID
+  for (uint16_t pulselen = L4NHALF; pulselen > LMID; pulselen-=2) {
+    pwm.setPWM(5, 0, pulselen);
+    delay(10);
+  }
 }

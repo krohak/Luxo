@@ -31,7 +31,7 @@ class Servo {
 	}
 
 	animate(animName){
-		console.log(animName)
+		console.log(animName.animName)
 
 		this.port.write("a\n", function(err) {
 			if (err) {

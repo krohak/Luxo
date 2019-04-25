@@ -28,7 +28,7 @@ module.exports = {
 	expressions: {
 		localFolder: 'greeting',
 		queryTerms: ['hello','hi','howdy','sup','whatsup'],
-		servo: 'look-up-inverted',
+		servo: 'dance',
 		led: {
 			anim: 'party',
 			color: 'green'
