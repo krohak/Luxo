@@ -12,7 +12,7 @@ class Servo {
 		// this.playbackRate = 33 //ms
 		// this.servoRestAngle = 1500
 		this.port = new SerialPort('/dev/ttyACM0', {
-			baudRate: 57600
+			baudRate: 9600
 		  })
 		
 		  // Open errors will be emitted as an error event
@@ -33,7 +33,7 @@ class Servo {
 	animate(animName){
 		console.log(animName)
 
-		this.port.write('a\n', function(err) {
+		this.port.write("a\n", function(err) {
 			if (err) {
 			  return console.log('Error on write: ', err.message)
 			}
