@@ -86,6 +86,7 @@ void loop() {
     Serial.println(inputString);
 
     if (inputString == "a\n"){
+      Serial.println("com a");
         head_nodding();
         head_nodding();
     }
