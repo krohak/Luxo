@@ -126,7 +126,7 @@ class Leds {
 		// }, time)
 
 		this.on(color, brightness)
-		setTimeout(this.off(), 3000);
+		setTimeout(off(), 3000);
 		
 	}
 
