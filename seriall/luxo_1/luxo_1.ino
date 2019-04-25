@@ -92,6 +92,8 @@ void loop() {
         // clear the string:
         inputString = "";
         stringComplete = false;
+
+        delay(1000);
         
         head_nodding();
         head_nodding();
@@ -109,14 +111,14 @@ void loop() {
           
           delay(100);
           
-          posture_stand(1000);
-          delay(100);
+//          posture_stand(1000);
+//          delay(100);
           posture_stand(1000);
 
           delay(100);
 
-          posture_sit(1000);
-          delay(100);
+//          posture_sit(1000);
+//          delay(100);
           posture_sit(1000);
           
     }
@@ -127,7 +129,8 @@ void loop() {
         // clear the string:
         inputString = "";
         stringComplete = false;
-        
+
+        delay(2000);
         posture_sit(2000);
 //        delay();
     }
@@ -139,7 +142,7 @@ void loop() {
         inputString = "";
         stringComplete = false;
         
-
+      delay(2000);
       posture_stand(2000);        
         
     }

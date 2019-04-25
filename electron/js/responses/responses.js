@@ -58,6 +58,17 @@ module.exports = {
 		sound: null
 	},
 
+	sad: {
+		localFolder: 'greeting',
+		queryTerms: ['hello','hi','howdy','sup','whatsup'],
+		servo: 'hello',
+		led: {
+			anim: 'blink',
+			color: 'red'
+		},
+		sound: null
+	},
+
 	wakeword: {
 		localFolder: null,
 		queryTerms: null,
