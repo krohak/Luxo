@@ -32,8 +32,16 @@ class Servo {
 
 	animate(animName){
 		console.log(animName.animName)
+		
+		let command = ""
+		if (animName.animName == "hello"){
+			command = "a\n"
 
-		this.port.write("a\n", function(err) {
+		}
+		else if(animName.animName == "dance"){
+			command = "b\n"
+		}
+		this.port.write(command, function(err) {
 			if (err) {
 			  return console.log('Error on write: ', err.message)
 			}
