@@ -6,7 +6,7 @@ module.exports = {
 	confused: {
 		localFolder: 'confused',
 		queryTerms: ['shrug', 'confused', 'dont know'],
-		servo: null,
+		servo: 'sit',
 		led: {
 			anim: 'blink',
 			color: 'orange'
@@ -32,6 +32,28 @@ module.exports = {
 		led: {
 			anim: 'party',
 			color: 'green'
+		},
+		sound: null
+	},
+
+	love: {
+		localFolder: 'greeting',
+		queryTerms: ['hello','hi','howdy','sup','whatsup'],
+		servo: 'stand',
+		led: {
+			anim: 'set',
+			color: 'pink'
+		},
+		sound: null
+	},
+
+	sad: {
+		localFolder: 'greeting',
+		queryTerms: ['hello','hi','howdy','sup','whatsup'],
+		servo: 'sit',
+		led: {
+			anim: 'set',
+			color: 'blue'
 		},
 		sound: null
 	},

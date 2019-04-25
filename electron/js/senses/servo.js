@@ -41,6 +41,15 @@ class Servo {
 		else if(animName.animName == "dance"){
 			command = "b\n"
 		}
+
+		else if(animName.animName == "sit"){
+			command = "c\n"
+		}
+
+		else if(animName.animName == "stand"){
+			command = "d\n"
+		}
+
 		this.port.write(command, function(err) {
 			if (err) {
 			  return console.log('Error on write: ', err.message)

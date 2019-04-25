@@ -119,6 +119,17 @@ class Leds {
 		}, time)
 	}
 
+	set(color='red', time=500, count=5, brightness=50){
+		
+		let blinkInterval = setInterval(() => {
+			
+			this.on(color, brightness)
+			
+		}, time)
+
+		this.off()
+	}
+
 	wakeword(color="white", brightness=100){
 		if(!this.colors.hasOwnProperty(color)){
 			console.error(`Color ${color} has not been set`)
