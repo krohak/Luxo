@@ -58,7 +58,7 @@ module.exports = {
 		sound: null
 	},
 
-	sad: {
+	handsome: {
 		localFolder: 'greeting',
 		queryTerms: ['hello','hi','howdy','sup','whatsup'],
 		servo: 'hello',
