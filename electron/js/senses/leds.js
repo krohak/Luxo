@@ -119,14 +119,25 @@ class Leds {
 		}, time)
 	}
 
-	set(color='red', time=500, count=5, brightness=50){
+	set(color='red', time=3000, count=1, brightness=50){
 		
-		// let blinkInterval = setInterval(() => {		
-			
-		// }, time)
+		let blinkCount = 0
 
-		this.on(color, brightness)
-		setTimeout(off(), 3000);
+		let blinkInterval = setInterval(() => {
+			if(blinkCount%2==0){
+				this.on(color, brightness)
+			} else {
+				this.off()
+			}
+
+			blinkCount++
+
+			if(blinkCount>count){
+				clearInterval(blinkInterval)
+				blinkInterval = null
+				this.off()
+			}
+		}, time)
 		
 	}
 
