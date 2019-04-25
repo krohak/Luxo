@@ -2,15 +2,24 @@ const path = require('path')
 const fs = require('fs')
 const event = require('../../js/events/events')
 const os = require('os')
-
+const SerialPort = require('serialport')
 
 class Servo {
 
 	constructor(){
-		this.pwm = null
-		this.servoTimer = null
-		this.playbackRate = 33 //ms
-		this.servoRestAngle = 1500
+		// this.pwm = null
+		// this.servoTimer = null
+		// this.playbackRate = 33 //ms
+		// this.servoRestAngle = 1500
+		this.port = new SerialPort('/dev/ttyACM0', {
+			baudRate: 57600
+		  })
+		
+		  // Open errors will be emitted as an error event
+		this.port.on('error', function(err) {
+			console.log('Error: ', err.message)
+		})
+		  
 
 		this.animate = this.animate.bind(this)
 		this.reset = this.animate.bind(this)
@@ -23,6 +32,13 @@ class Servo {
 
 	animate(animName){
 		console.log(animName)
+
+		this.port.write('a\n', function(err) {
+			if (err) {
+			  return console.log('Error on write: ', err.message)
+			}
+			console.log('message written')
+		  })
 
 	}
 

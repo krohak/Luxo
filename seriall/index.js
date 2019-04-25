@@ -1,5 +1,5 @@
 const SerialPort = require('serialport')
-const port = new SerialPort('/dev/ttyUSB0', {
+const port = new SerialPort('/dev/ttyACM0', {
   baudRate: 57600
 })
 
