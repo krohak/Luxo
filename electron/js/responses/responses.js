@@ -17,7 +17,7 @@ module.exports = {
 	greeting: {
 		localFolder: 'greeting',
 		queryTerms: ['hello','hi','howdy','sup','whatsup'],
-		servo: 'hello',
+		servo: null,
 		led: {
 			anim: 'blink',
 			color: 'green'
