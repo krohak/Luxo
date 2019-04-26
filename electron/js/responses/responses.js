@@ -6,7 +6,7 @@ module.exports = {
 	confused: {
 		localFolder: 'confused',
 		queryTerms: ['shrug', 'confused', 'dont know'],
-		servo: 'sit',
+		servo: null,
 		led: {
 			anim: 'blink',
 			color: 'orange'
@@ -68,6 +68,42 @@ module.exports = {
 		},
 		sound: null
 	},
+
+	turnon: {
+		localFolder: 'greeting',
+		queryTerms: ['hello','hi','howdy','sup','whatsup'],
+		servo: null,
+		led: {
+			anim: 'on',
+			color: 'white'
+		},
+		sound: null
+	},
+
+
+	turnoff: {
+		localFolder: 'greeting',
+		queryTerms: ['hello','hi','howdy','sup','whatsup'],
+		servo: null,
+		led: {
+			anim: 'off',
+			color: 'white'
+		},
+		sound: null
+	},
+
+	productivity: {
+		localFolder: 'greeting',
+		queryTerms: ['hello','hi','howdy','sup','whatsup'],
+		servo: null,
+		led: {
+			anim: 'set',
+			color: 'green'
+		},
+		url: 'https://maker.ifttt.com/trigger/productivity/with/key/dM0FI5I7c9ziuJqb7L9Wzu',
+		sound: null
+	},
+
 
 	wakeword: {
 		localFolder: null,

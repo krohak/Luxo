@@ -3,6 +3,7 @@ const responses = require('../../js/responses/responses')
 const common = require('../../js/helpers/common')
 // const gif = require('../../js/helpers/gifs')
 // const video = require('../../js/helpers/videos')
+const https = require('https');
 
 async function setAnswer(ans=null, overrides={}){
 
@@ -16,6 +17,26 @@ async function setAnswer(ans=null, overrides={}){
 	console.log(`here ${String(ans.led)}`)
 	event.emit('led-on', {anim: ans.led.anim, color: ans.led.color})
 	event.emit('servo-move', {animName: ans.servo})
+
+	if(ans.hasOwnProperty(url)){
+
+		https.get(ans.url, (resp) => {
+			let data = '';
+		  
+			// A chunk of data has been recieved.
+			resp.on('data', (chunk) => {
+			  data += chunk;
+			});
+		  
+			// The whole response has been received. Print out the result.
+			resp.on('end', () => {
+			  console.log(JSON.parse(data).explanation);
+			});
+		  
+		  }).on("error", (err) => {
+			console.log("Error: " + err.message);
+		  });
+	}
 
 	let q = await common.setQuery(ans)
 	console.log(`BACK IN FUNCTION ${q}`)
