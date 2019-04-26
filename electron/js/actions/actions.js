@@ -18,7 +18,7 @@ async function setAnswer(ans=null, overrides={}){
 	event.emit('led-on', {anim: ans.led.anim, color: ans.led.color})
 	event.emit('servo-move', {animName: ans.servo})
 
-	if(ans.hasOwnProperty(url)){
+	if(ans.url){
 
 		https.get(ans.url, (resp) => {
 			let data = '';
