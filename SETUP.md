@@ -1,6 +1,3 @@
-# Get a Peeqo Dev Kit
-Get on the waitlist for a peeqo dev kit? Enter your email here - http://bit.ly/2TyocgY
-
 # Setup Instructions
 
 ## Getting Started:
@@ -12,30 +9,30 @@ Get on the waitlist for a peeqo dev kit? Enter your email here - http://bit.ly/2
 
 ### Setup Wakeword
 
-Peeqo uses snowboy for offline on-device wakeword detection. Follow these steps to get him to respond to you saying Peeqo.
+Luxo uses snowboy for offline on-device wakeword detection. Follow these steps to get him to respond to you saying Luxo.
 
 1. Go to <a href="https://snowboy.kitt.ai/dashboard" target="_blank">https://snowboy.kitt.ai/dashboard</a>
 2. Login using Google/Github/Facebook
-3. Type “Peeqo” in the “Search Hotwords” text box & hit enter. Only one result should turn up
-4. Click on the microphone icon near the Peeqo search result
+3. Type “Luxo” in the “Search Hotwords” text box & hit enter. Only one result should turn up
+4. Click on the microphone icon near the Luxo search result
 5. Click “Record my voice” in the popup that opens
-6. Follow the instructions and record yourself saying Peeqo three times. You will need to allow the browser microphone access
+6. Follow the instructions and record yourself saying Luxo three times. You will need to allow the browser microphone access
 7. Click on “Test the model”
-8. Enter the details on the left and say “Peeqo” a couple of times till it says “Test Successful”
-9. The model is now trained to respond to only you saying Peeqo
+8. Enter the details on the left and say “Luxo” a couple of times till it says “Test Successful”
+9. The model is now trained to respond to only you saying Luxo
 10. Click on “Save and download”. 
-11. This will create a file called `Peeqo.pmdl`.
+11. This will create a file called `Luxo.pmdl`.
 12. Place this file in `/electron/app/config/`
 
 ### Setup Dialogflow
 
-Peeqo uses Google's dialogflow for Speech-to-text. You can replace this with another service of your choice later. 
+Luxo uses Google's dialogflow for Speech-to-text. You can replace this with another service of your choice later. 
 
 1. Go to <a href="http://dialogflow.com" target="_blank">dialogflow.com</a>
 2. Click on “Go to console” in top right and login using your google id
 3. Grant permissions, select Country and accept terms & conditions
 4. Click “Create Agent”
-5. Enter “Peeqo” in agent name and click “Create”. Change language and time zone if required. Make sure to leave the default option of “Create a new Google project” selected
+5. Enter “Luxo” in agent name and click “Create”. Change language and time zone if required. Make sure to leave the default option of “Create a new Google project” selected
 6. Once created, click on the cog icon near the agent name in the left hand menu to open agent settings
 7. Click on Export and Import > Import from Zip
 8. Drag and drop `/electron/app/config/dialogflow-agent.zip` from this repo. Type IMPORT in the text box and click Import to upload this agent
@@ -54,7 +51,7 @@ After following the two steps above and entering the necessary keys and filepath
 
 ### Setup on System
 
-You can currently run the app on Mac OSX or Ubuntu14.04 for development purposes. You can develop on your system and then push it to your Peeqo's raspberry pi. On other systems, if wakeword detection is unsupported, I have added a small button on the top left corner to simulate a wakeword. 
+You can currently run the app on Mac OSX or Ubuntu14.04 for development purposes. You can develop on your system and then push it to your Luxo's raspberry pi. On other systems, if wakeword detection is unsupported, I have added a small button on the top left corner to simulate a wakeword. 
 
 #### Setup on Mac OSX:
 
@@ -73,7 +70,7 @@ You can currently run the app on Mac OSX or Ubuntu14.04 for development purposes
   * `pip install pyaudio`
   * `sudo apt-get install libmagic-dev libatlas-base-dev`
 * **Clone github repo:**
-  * `git clone https://github.com/shekit/peeqo.git`
+  * `git clone https://github.com/shekit/Luxo.git`
 * **CD into github folder:**
   * `cd /path/to/repo/electron`
 * **Install packages:**
@@ -101,7 +98,7 @@ You can currently run the app on Mac OSX or Ubuntu14.04 for development purposes
   * `pip install pyaudio`
   * `sudo apt-get install libmagic-dev libatlas-base-dev`
 * **Clone github repo:**
-  * `git clone https://github.com/shekit/peeqo.git`
+  * `git clone https://github.com/shekit/Luxo.git`
 * **CD into github folder:**
   * `cd /path/to/repo/electron`
 * **Install packages:**
@@ -135,20 +132,20 @@ You can setup these additional services as well. These are optional for initial 
 1. Repeat all the steps in Setup Wakeword, except for Step 3 & Step 4.
 2. Instead click on the “Create Hotword” button and record your own custom wakeword
 3. Remember to change the wakeword key in `/app/config/config-dev.js` to match your custom wakeword
-4. P.S If using your own custom keyword, please follow the above steps and record for Peeqo as well so we can have a general model which needs 500 samples from different people.
+4. P.S If using your own custom keyword, please follow the above steps and record for Luxo as well so we can have a general model which needs 500 samples from different people.
 
 
 #### Vlipsy Api - For Video responses:
-1. For video responses, Peeqo uses vlipsy.com
-2. Vlipsy has no public api key. You can request one by emailing api@vlipsy.com. You can mention you need it for Peeqo.
+1. For video responses, Luxo uses vlipsy.com
+2. Vlipsy has no public api key. You can request one by emailing api@vlipsy.com. You can mention you need it for Luxo.
 3. Enter this key in `/app/config/config.js` -> `vlipsy.key`
 
 #### Giphy Api - For GIF responses:
-1. For gif responses, Peeqo uses giphy.com. Giphy has a public api key included in the app which is ready to use.
+1. For gif responses, Luxo uses giphy.com. Giphy has a public api key included in the app which is ready to use.
 2. You can get your own private api key by visiting <a href="https://developers.giphy.com/docs/" target="_blank">https://developers.giphy.com/docs/</a> and requesting for one for free
 
 #### Setup Weather Api:
-1. Peeqo uses openweather api for weather updates
+1. Luxo uses openweather api for weather updates
 2. You can get a free api key by going to <a href="https://openweathermap.org/api" targt="_blank">https://openweathermap.org/api</a>
 3. Enter this key `app/config/config-dev.js` -> `openweather.key`
 
